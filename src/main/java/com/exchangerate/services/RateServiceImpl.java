@@ -61,7 +61,6 @@ public class RateServiceImpl implements RateService {
 			return rateDTO;
 
 		}
-	//	return null; // RETURN ERROR
 		throw new InvalidParameterException("Couldn't parse Rate");
 	}
 
@@ -73,7 +72,6 @@ public class RateServiceImpl implements RateService {
 			throw new InvalidParameterException("Date not correctly parsed");
 		Date df = getSimpleDateFormat(text);
 		if (df == null) {
-		//	return false;
 			throw new InvalidParameterException("Date not correctly parsed");
 		}
 		
@@ -84,7 +82,6 @@ public class RateServiceImpl implements RateService {
 		calendarYesterday.add(Calendar.DATE, -1);
 		
 		 if((((calendar.get(Calendar.YEAR)) <=1999)) || (calendar.compareTo(calendarYesterday)>0)) {
-		//	return false;
 			throw new InvalidParameterException("Only dates between 2000-01-01 and yesterday are allowed.");
 		}
 		return true;
@@ -97,7 +94,6 @@ public class RateServiceImpl implements RateService {
 			df.parse(text);
 			return df.parse(text);
 		} catch (ParseException ex) {
-		//	return null;
 			throw new InvalidParameterException("Date not correctly parsed");
 		}
 	}

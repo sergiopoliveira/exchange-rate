@@ -1,6 +1,6 @@
 package com.exchangerate.services;
 
-import com.exchangerate.domain.RateDTO;
+import com.exchangerate.dto.RateDTO;
 
 public interface RateService {
 

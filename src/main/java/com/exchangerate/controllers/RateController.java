@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.exchangerate.domain.RateDTO;
+import com.exchangerate.dto.RateDTO;
 import com.exchangerate.services.RateService;
 
 import io.swagger.annotations.ApiOperation;
@@ -28,7 +28,6 @@ public class RateController {
 	@ResponseStatus(HttpStatus.OK)
 	public RateDTO getRate(@PathVariable String date, @PathVariable String baseCurrency, @PathVariable String targetCurrency) {
 
-		
 		return rateService.getRate(date, baseCurrency, targetCurrency);
 	}
 }

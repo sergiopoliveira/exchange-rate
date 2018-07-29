@@ -1,12 +1,14 @@
 package com.exchangerate.dto;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
@@ -14,6 +16,7 @@ public class RateDTO {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonIgnore
 	private Long id;
 
 	@JsonProperty("exchange_rate")
@@ -24,6 +27,16 @@ public class RateDTO {
 
 	@JsonProperty("exchange_rate_trend")
 	private String exchangeRateTrend;
+	
+
+	Calendar calendar = Calendar.getInstance();
+	
+	@JsonIgnore
+	private int year =  calendar.get(Calendar.YEAR);
+	@JsonIgnore
+	private int month = calendar.get(Calendar.MONTH) + 1;
+	@JsonIgnore
+	private int day = calendar.get(Calendar.DAY_OF_MONTH);
 
 	public RateDTO(Long id, BigDecimal exchangeRate, BigDecimal averageFiveDays, String exchangeRateTrend) {
 		this.id = id;
@@ -67,4 +80,16 @@ public class RateDTO {
 		this.exchangeRateTrend = exchangeRateTrend;
 	}
 
+	public int getYear() {
+		return year;
+	}
+
+	public int getMonth() {
+		return month;
+	}
+
+	public int getDay() {
+		return day;
+	}
+	
 }

@@ -6,7 +6,7 @@ import com.exchangerate.dto.RateDTO;
 
 public interface HistoricalInformationService {
 
-	List<RateDTO> getDaily(String year, String month, String day);
+	List<RateDTO> getDaily(int year, int month, int day);
 	
-	List<RateDTO> getMonthly(String year, String month);
+	List<RateDTO> getMonthly(int year, int month);
 }

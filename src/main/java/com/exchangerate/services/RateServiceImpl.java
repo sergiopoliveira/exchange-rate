@@ -54,6 +54,7 @@ public class RateServiceImpl implements RateService {
 					calculateExchangeRateTrend(targetCurrency, rateDay1, rateDay2, rateDay3, rateDay4, rateDay5));
 
 			// All successful queries should be persisted in the DB.
+			rateDTO.setId(null);
 			rateRepository.save(rateDTO);
 			
 			// return DTO

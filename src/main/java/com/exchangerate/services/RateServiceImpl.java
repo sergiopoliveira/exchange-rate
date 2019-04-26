@@ -12,13 +12,16 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class RateServiceImpl implements RateService {
 
     private static final String DATE_NOT_CORRECTLY_PARSED = "Date not correctly parsed";
+    private static final int FIVE_DAYS = 5;
     private Calendar calendar = Calendar.getInstance();
     private RestTemplate restTemplate = new RestTemplate();
     private RateDTO rateDTO = new RateDTO();
@@ -41,19 +44,19 @@ public class RateServiceImpl implements RateService {
                     .getForObject("https://api.exchangeratesapi.io/" + date + "?base=" + baseCurrency, Rate.class);
             rateDTO.setExchangeRate(todayRate.getRates().get(targetCurrency));
 
-            Rate rateDay1 = callApi(baseCurrency);
-            Rate rateDay2 = callApi(baseCurrency);
-            Rate rateDay3 = callApi(baseCurrency);
-            Rate rateDay4 = callApi(baseCurrency);
-            Rate rateDay5 = callApi(baseCurrency);
+            List<Rate> rates = new ArrayList<>();
+
+            for (int i = 0; i < FIVE_DAYS; i++) {
+                rates.add(callApi(baseCurrency));
+            }
 
             // calculate averageFiveDays of 5 days and set it on the DTO
             rateDTO.setAverageFiveDays(
-                    calculateAverageFiveDays(targetCurrency, rateDay1, rateDay2, rateDay3, rateDay4, rateDay5));
+                    calculateAverageRate(targetCurrency, rates));
 
             // calculate exchange rate trend, exchangeRateTrend, and set it on the DTO
             rateDTO.setExchangeRateTrend(
-                    calculateExchangeRateTrend(targetCurrency, rateDay1, rateDay2, rateDay3, rateDay4, rateDay5));
+                    calculateExchangeRateTrend(targetCurrency, rates));
 
             // All successful queries should be persisted in the DB.
             rateDTO.setId(null);
@@ -115,14 +118,13 @@ public class RateServiceImpl implements RateService {
                 Rate.class);
     }
 
-    private ExchangeRateTrend calculateExchangeRateTrend(String targetCurrency, Rate rateDay1, Rate rateDay2, Rate rateDay3,
-                                                         Rate rateDay4, Rate rateDay5) {
+    private ExchangeRateTrend calculateExchangeRateTrend(String targetCurrency, List<Rate> rates) {
 
         for (int i = -1; i <= 1; i++) {
-            if ((rateDay1.getRates().get(targetCurrency).compareTo(rateDay2.getRates().get(targetCurrency)) == i)
-                    && (rateDay2.getRates().get(targetCurrency).compareTo(rateDay3.getRates().get(targetCurrency)) == i)
-                    && (rateDay3.getRates().get(targetCurrency).compareTo(rateDay4.getRates().get(targetCurrency)) == i)
-                    && (rateDay4.getRates().get(targetCurrency).compareTo(rateDay5.getRates().get(targetCurrency)) == i)) {
+            for (int j = 0; j < rates.size(); j++) {
+                if (rates.get(j).getRates().get(targetCurrency).compareTo(rates.get(j + 1).getRates().get(targetCurrency)) == i) {
+                    continue;
+                }
                 if (i == -1) {
                     return ExchangeRateTrend.ASC;
                 } else if (i == 0) {
@@ -135,15 +137,14 @@ public class RateServiceImpl implements RateService {
         return ExchangeRateTrend.UNDEFINED;
     }
 
-    private BigDecimal calculateAverageFiveDays(String targetCurrency, Rate rateDay1, Rate rateDay2, Rate rateDay3,
-                                                Rate rateDay4, Rate rateDay5) {
+    private BigDecimal calculateAverageRate(String targetCurrency, List<Rate> rates) {
 
-        BigDecimal averageFiveDays = (rateDay1.getRates().get(targetCurrency))
-                .add(rateDay2.getRates().get(targetCurrency)).add(rateDay3.getRates().get(targetCurrency))
-                .add(rateDay4.getRates().get(targetCurrency)).add(rateDay5.getRates().get(targetCurrency));
+        BigDecimal sumRates = BigDecimal.ZERO;
 
-        averageFiveDays = averageFiveDays.divide(BigDecimal.valueOf(5), RoundingMode.UP);
+        for (Rate rate : rates) {
+            sumRates = sumRates.add(rate.getRates().get((targetCurrency)));
+        }
 
-        return averageFiveDays;
+        return sumRates.divide(BigDecimal.valueOf(5), RoundingMode.UP);
     }
 }

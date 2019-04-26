@@ -1,22 +1,23 @@
 package com.exchangerate.services;
 
+import com.exchangerate.domain.Rate;
+import com.exchangerate.dto.RateDTO;
+import com.exchangerate.exceptions.InvalidParameterException;
+import com.exchangerate.repositories.RateRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-
-import com.exchangerate.domain.Rate;
-import com.exchangerate.dto.RateDTO;
-import com.exchangerate.exceptions.InvalidParameterException;
-import com.exchangerate.repositories.RateRepository;
-
 @Service
 public class RateServiceImpl implements RateService {
 
+    private static final String DATE_NOT_CORRECTLY_PARSED = "Date not correctly parsed";
     private Calendar calendar = Calendar.getInstance();
     private RestTemplate restTemplate = new RestTemplate();
     private RateDTO rateDTO = new RateDTO();
@@ -68,10 +69,10 @@ public class RateServiceImpl implements RateService {
 
         // check if fields are correct (YYYY-MM-DD)
         if (text == null || !text.matches("\\d{4}-[01]\\d-[0-3]\\d"))
-            throw new InvalidParameterException("Date not correctly parsed");
+            throw new InvalidParameterException(DATE_NOT_CORRECTLY_PARSED);
         Date df = getSimpleDateFormat(text);
         if (df == null) {
-            throw new InvalidParameterException("Date not correctly parsed");
+            throw new InvalidParameterException(DATE_NOT_CORRECTLY_PARSED);
         }
 
         calendar.setTime(df);
@@ -93,7 +94,7 @@ public class RateServiceImpl implements RateService {
             df.parse(text);
             return df.parse(text);
         } catch (ParseException ex) {
-            throw new InvalidParameterException("Date not correctly parsed");
+            throw new InvalidParameterException(DATE_NOT_CORRECTLY_PARSED);
         }
     }
 
@@ -140,7 +141,7 @@ public class RateServiceImpl implements RateService {
                 .add(rateDay2.getRates().get(targetCurrency)).add(rateDay3.getRates().get(targetCurrency))
                 .add(rateDay4.getRates().get(targetCurrency)).add(rateDay5.getRates().get(targetCurrency));
 
-        averageFiveDays = averageFiveDays.divide(BigDecimal.valueOf(5));
+        averageFiveDays = averageFiveDays.divide(BigDecimal.valueOf(5), RoundingMode.UP);
 
         return averageFiveDays;
     }

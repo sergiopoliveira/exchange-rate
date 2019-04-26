@@ -1,12 +1,12 @@
 package com.exchangerate.domain;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Entity
@@ -54,7 +54,7 @@ public class Rate {
         this.date = date;
     }
 
-    public HashMap<String, BigDecimal> getRates() {
+    public Map<String, BigDecimal> getRates() {
         return rates;
     }
 

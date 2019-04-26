@@ -1,26 +1,25 @@
 package com.exchangerate.services;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
-
-import java.util.Arrays;
-import java.util.List;
-
+import com.exchangerate.dto.RateDTO;
+import com.exchangerate.repositories.RateRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.exchangerate.dto.RateDTO;
-import com.exchangerate.repositories.RateRepository;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 public class HistoricalInformationServiceTest {
 
 	
-	HistoricalInformationService historicalInformationService;
+	private HistoricalInformationService historicalInformationService;
 	
 	@Mock
-	RateRepository rateRepository;
+	private RateRepository rateRepository;
 	
 	@Before
 	public void setUp() throws Exception {

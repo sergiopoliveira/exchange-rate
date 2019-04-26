@@ -17,7 +17,7 @@ public class RateServiceTest {
 	private RateService rateService;
 
 	@Mock
-	RateRepository rateRepository;
+	private RateRepository rateRepository;
 	
 	@Before
 	public void setUp() throws Exception {

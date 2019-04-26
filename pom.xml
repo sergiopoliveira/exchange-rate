@@ -10,6 +10,26 @@
 
     <name>exchange-rate</name>
     <description>Demo project for Exchange Rate API</description>
+    <url>https://github.com/sergiopoliveira/exchange-rate</url>
+
+    <issueManagement>
+        <url>https://github.com/sergiopoliveira/exchange-rate/issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/sergiopoliveira/exchange-rate</url>
+        <connection>scm:git:git://github.com/sergiopoliveira/exchange-rate.git</connection>
+        <developerConnection>scm:git:git@github.com:sergiopoliveira/exchange-rate.git</developerConnection>
+    </scm>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

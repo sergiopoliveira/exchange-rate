@@ -15,8 +15,7 @@ import static org.mockito.Mockito.when;
 public class RateServiceTest {
 
 	private RateService rateService;
-	private HistoricalInformationService historicalInformationService;
-	
+
 	@Mock
 	RateRepository rateRepository;
 	
@@ -24,8 +23,7 @@ public class RateServiceTest {
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 		rateService = new RateServiceImpl(rateRepository);
-		historicalInformationService = new HistoricalInformationServiceImpl(rateRepository);
-}
+	}
 	
 	@Test
 	public void getRate() throws Exception {

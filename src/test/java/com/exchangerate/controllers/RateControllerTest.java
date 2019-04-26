@@ -1,5 +1,6 @@
 package com.exchangerate.controllers;
 
+import com.exchangerate.domain.ExchangeRateTrend;
 import com.exchangerate.dto.RateDTO;
 import com.exchangerate.services.RateService;
 import org.junit.Before;
@@ -21,51 +22,50 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class RateControllerTest {
 
-	
-	@Mock
-	private RateService rateService;
+    @Mock
+    private RateService rateService;
 
-	@InjectMocks
-	private RateController rateController;
+    @InjectMocks
+    private RateController rateController;
 
-	private MockMvc mockMvc;
-	
-	@Before
-	public void setUp() throws Exception {
-		MockitoAnnotations.initMocks(this);
+    private MockMvc mockMvc;
 
-		mockMvc = MockMvcBuilders.standaloneSetup(rateController)
-				.setControllerAdvice(new RestResponseEntityExceptionHandler())
-				.build();
-	}
-		
-		@Test
-		public void testAscendingRate() throws Exception {
-			
-			RateDTO rate1 = new RateDTO();
-			rate1.setId(1L);
-			rate1.setExchangeRate(BigDecimal.valueOf(0.7));
-			rate1.setAverageFiveDays(BigDecimal.valueOf(0.69));
-			rate1.setExchangeRateTrend("descending");
-			
-			when(rateService.getRate("2010-03-19", "EUR", "CHF")).thenReturn(rate1);
-			
-			mockMvc.perform(get(RateController.BASE_URL + "/2010-03-19/EUR/CHF")
-					.contentType(MediaType.APPLICATION_JSON)
-					.accept(MediaType.APPLICATION_JSON))
-					.andExpect(status().isOk())
-					.andExpect(jsonPath("$.exchange_rate", equalTo(0.7)))
-					.andExpect(jsonPath("$.average_five_days", equalTo(0.69)))	
-					.andExpect(jsonPath("$.exchange_rate_trend", equalTo("descending")));
-	}	
-		
-		@Test
-		public void testErrorURLFormat() throws Exception {
-			
-			//malformed URL
-			mockMvc.perform(get(RateController.BASE_URL + "/aa/CHF")
-					.contentType(MediaType.APPLICATION_JSON)
-					.accept(MediaType.APPLICATION_JSON))
-					.andExpect(status().is4xxClientError());
-	}	
+    @Before
+    public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
+
+        mockMvc = MockMvcBuilders.standaloneSetup(rateController)
+                .setControllerAdvice(new RestResponseEntityExceptionHandler())
+                .build();
+    }
+
+    @Test
+    public void testAscendingRate() throws Exception {
+
+        RateDTO rate1 = new RateDTO();
+        rate1.setId(1L);
+        rate1.setExchangeRate(BigDecimal.valueOf(0.7));
+        rate1.setAverageFiveDays(BigDecimal.valueOf(0.69));
+        rate1.setExchangeRateTrend(ExchangeRateTrend.DESC);
+
+        when(rateService.getRate("2010-03-19", "EUR", "CHF")).thenReturn(rate1);
+
+        mockMvc.perform(get(RateController.BASE_URL + "/2010-03-19/EUR/CHF")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.exchange_rate", equalTo(0.7)))
+                .andExpect(jsonPath("$.average_five_days", equalTo(0.69)))
+                .andExpect(jsonPath("$.exchange_rate_trend", equalTo(ExchangeRateTrend.DESC.toString())));
+    }
+
+    @Test
+    public void testErrorURLFormat() throws Exception {
+
+        //malformed URL
+        mockMvc.perform(get(RateController.BASE_URL + "/foo/CHF")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError());
+    }
 }

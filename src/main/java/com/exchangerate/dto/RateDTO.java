@@ -1,5 +1,6 @@
 package com.exchangerate.dto;
 
+import com.exchangerate.domain.ExchangeRateTrend;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -25,7 +26,7 @@ public class RateDTO {
     private BigDecimal averageFiveDays;
 
     @JsonProperty("exchange_rate_trend")
-    private String exchangeRateTrend;
+    private ExchangeRateTrend exchangeRateTrend;
 
 
     private Calendar calendar = Calendar.getInstance();
@@ -37,7 +38,7 @@ public class RateDTO {
     @JsonIgnore
     private int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-    public RateDTO(Long id, BigDecimal exchangeRate, BigDecimal averageFiveDays, String exchangeRateTrend) {
+    public RateDTO(Long id, BigDecimal exchangeRate, BigDecimal averageFiveDays, ExchangeRateTrend exchangeRateTrend) {
         this.id = id;
         this.exchangeRate = exchangeRate;
         this.averageFiveDays = averageFiveDays;
@@ -71,11 +72,11 @@ public class RateDTO {
         this.averageFiveDays = averageFiveDays;
     }
 
-    public String getExchangeRateTrend() {
+    public ExchangeRateTrend getExchangeRateTrend() {
         return exchangeRateTrend;
     }
 
-    public void setExchangeRateTrend(String exchangeRateTrend) {
+    public void setExchangeRateTrend(ExchangeRateTrend exchangeRateTrend) {
         this.exchangeRateTrend = exchangeRateTrend;
     }
 

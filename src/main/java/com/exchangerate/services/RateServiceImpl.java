@@ -1,5 +1,6 @@
 package com.exchangerate.services;
 
+import com.exchangerate.domain.ExchangeRateTrend;
 import com.exchangerate.domain.Rate;
 import com.exchangerate.dto.RateDTO;
 import com.exchangerate.exceptions.InvalidParameterException;
@@ -114,8 +115,8 @@ public class RateServiceImpl implements RateService {
                 Rate.class);
     }
 
-    private String calculateExchangeRateTrend(String targetCurrency, Rate rateDay1, Rate rateDay2, Rate rateDay3,
-                                              Rate rateDay4, Rate rateDay5) {
+    private ExchangeRateTrend calculateExchangeRateTrend(String targetCurrency, Rate rateDay1, Rate rateDay2, Rate rateDay3,
+                                                         Rate rateDay4, Rate rateDay5) {
 
         for (int i = -1; i <= 1; i++) {
             if ((rateDay1.getRates().get(targetCurrency).compareTo(rateDay2.getRates().get(targetCurrency)) == i)
@@ -123,15 +124,15 @@ public class RateServiceImpl implements RateService {
                     && (rateDay3.getRates().get(targetCurrency).compareTo(rateDay4.getRates().get(targetCurrency)) == i)
                     && (rateDay4.getRates().get(targetCurrency).compareTo(rateDay5.getRates().get(targetCurrency)) == i)) {
                 if (i == -1) {
-                    return "ascending";
+                    return ExchangeRateTrend.ASC;
                 } else if (i == 0) {
-                    return "constant";
+                    return ExchangeRateTrend.CONS;
                 } else {
-                    return "descending";
+                    return ExchangeRateTrend.DESC;
                 }
             }
         }
-        return "undefined";
+        return ExchangeRateTrend.UNDEFINED;
     }
 
     private BigDecimal calculateAverageFiveDays(String targetCurrency, Rate rateDay1, Rate rateDay2, Rate rateDay3,

@@ -1,5 +1,6 @@
 package com.exchangerate.controllers;
 
+import com.exchangerate.domain.ExchangeRateTrend;
 import com.exchangerate.dto.RateDTO;
 import com.exchangerate.services.HistoricalInformationService;
 import org.junit.Before;
@@ -45,12 +46,12 @@ public class HistoricalInformationControllerTest {
 		RateDTO rate1 = new RateDTO();
 		rate1.setAverageFiveDays(BigDecimal.valueOf(0.5));
 		rate1.setExchangeRate(BigDecimal.valueOf(0.9));
-		rate1.setExchangeRateTrend("ascending");
+		rate1.setExchangeRateTrend(ExchangeRateTrend.ASC);
 		
 		RateDTO rate2 = new RateDTO();
 		rate2.setAverageFiveDays(BigDecimal.valueOf(0.4));
 		rate2.setExchangeRate(BigDecimal.valueOf(0.4));
-		rate2.setExchangeRateTrend("constant");
+		rate2.setExchangeRateTrend(ExchangeRateTrend.CONS);
 		
 		List<RateDTO> rates = Arrays.asList(rate1, rate2);
 		
@@ -68,12 +69,12 @@ public class HistoricalInformationControllerTest {
 		RateDTO rate1 = new RateDTO();
 		rate1.setAverageFiveDays(BigDecimal.valueOf(0.5));
 		rate1.setExchangeRate(BigDecimal.valueOf(0.9));
-		rate1.setExchangeRateTrend("ascending");
+		rate1.setExchangeRateTrend(ExchangeRateTrend.ASC);
 		
 		RateDTO rate2 = new RateDTO();
 		rate2.setAverageFiveDays(BigDecimal.valueOf(0.4));
 		rate2.setExchangeRate(BigDecimal.valueOf(0.4));
-		rate2.setExchangeRateTrend("constant");
+		rate2.setExchangeRateTrend(ExchangeRateTrend.CONS);
 		
 		List<RateDTO> rates = Arrays.asList(rate1, rate2);
 		

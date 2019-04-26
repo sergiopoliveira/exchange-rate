@@ -13,96 +13,95 @@ import java.util.Calendar;
 @Entity
 public class RateDTO {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonIgnore
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
+    private Long id;
 
-	@JsonProperty("exchange_rate")
-	private BigDecimal exchangeRate;
+    @JsonProperty("exchange_rate")
+    private BigDecimal exchangeRate;
 
-	@JsonProperty("average_five_days")
-	private BigDecimal averageFiveDays;
+    @JsonProperty("average_five_days")
+    private BigDecimal averageFiveDays;
 
-	@JsonProperty("exchange_rate_trend")
-	private String exchangeRateTrend;
-	
+    @JsonProperty("exchange_rate_trend")
+    private String exchangeRateTrend;
 
-	private Calendar calendar = Calendar.getInstance();
-	
-	@JsonIgnore
-	private int year =  calendar.get(Calendar.YEAR);
-	@JsonIgnore
-	private int month = calendar.get(Calendar.MONTH) + 1;
-	@JsonIgnore
-	private int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-	public RateDTO(Long id, BigDecimal exchangeRate, BigDecimal averageFiveDays, String exchangeRateTrend) {
-		this.id = id;
-		this.exchangeRate = exchangeRate;
-		this.averageFiveDays = averageFiveDays;
-		this.exchangeRateTrend = exchangeRateTrend;
-	}
+    private Calendar calendar = Calendar.getInstance();
 
-	public RateDTO() {
-	}
+    @JsonIgnore
+    private int year = calendar.get(Calendar.YEAR);
+    @JsonIgnore
+    private int month = calendar.get(Calendar.MONTH) + 1;
+    @JsonIgnore
+    private int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-	public Long getId() {
-		return id;
-	}
+    public RateDTO(Long id, BigDecimal exchangeRate, BigDecimal averageFiveDays, String exchangeRateTrend) {
+        this.id = id;
+        this.exchangeRate = exchangeRate;
+        this.averageFiveDays = averageFiveDays;
+        this.exchangeRateTrend = exchangeRateTrend;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public RateDTO() {
+    }
 
-	public BigDecimal getExchangeRate() {
-		return exchangeRate;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setExchangeRate(BigDecimal exchangeRate) {
-		this.exchangeRate = exchangeRate;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public BigDecimal getAverageFiveDays() {
-		return averageFiveDays;
-	}
+    public BigDecimal getExchangeRate() {
+        return exchangeRate;
+    }
 
-	public void setAverageFiveDays(BigDecimal averageFiveDays) {
-		this.averageFiveDays = averageFiveDays;
-	}
+    public void setExchangeRate(BigDecimal exchangeRate) {
+        this.exchangeRate = exchangeRate;
+    }
 
-	public String getExchangeRateTrend() {
-		return exchangeRateTrend;
-	}
+    public BigDecimal getAverageFiveDays() {
+        return averageFiveDays;
+    }
 
-	public void setExchangeRateTrend(String exchangeRateTrend) {
-		this.exchangeRateTrend = exchangeRateTrend;
-	}
+    public void setAverageFiveDays(BigDecimal averageFiveDays) {
+        this.averageFiveDays = averageFiveDays;
+    }
 
-	public int getYear() {
-		return year;
-	}
+    public String getExchangeRateTrend() {
+        return exchangeRateTrend;
+    }
 
-	public int getMonth() {
-		return month;
-	}
+    public void setExchangeRateTrend(String exchangeRateTrend) {
+        this.exchangeRateTrend = exchangeRateTrend;
+    }
 
-	public int getDay() {
-		return day;
-	}
+    public int getYear() {
+        return year;
+    }
 
-	public void setYear(int year) {
-		this.year = year;
-	}
+    public int getMonth() {
+        return month;
+    }
 
-	public void setMonth(int month) {
-		this.month = month;
-	}
+    public int getDay() {
+        return day;
+    }
 
-	public void setDay(int day) {
-		this.day = day;
-	}
-	
-	
-	
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+
 }

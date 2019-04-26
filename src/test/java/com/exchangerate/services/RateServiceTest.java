@@ -1,23 +1,21 @@
 package com.exchangerate.services;
 
-import java.util.Calendar;
-
+import com.exchangerate.dto.RateDTO;
+import com.exchangerate.repositories.RateRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Calendar;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
-import com.exchangerate.dto.RateDTO;
-import com.exchangerate.repositories.RateRepository;
-
 public class RateServiceTest {
 
-	RateService rateService;
-	HistoricalInformationService historicalInformationService;
+	private RateService rateService;
+	private HistoricalInformationService historicalInformationService;
 	
 	@Mock
 	RateRepository rateRepository;

@@ -1,5 +1,16 @@
 package com.exchangerate.controllers;
 
+import com.exchangerate.dto.RateDTO;
+import com.exchangerate.services.HistoricalInformationService;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
@@ -10,27 +21,15 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import com.exchangerate.dto.RateDTO;
-import com.exchangerate.services.HistoricalInformationService;
-
 public class HistoricalInformationControllerTest {
 
 	@Mock
-	HistoricalInformationService historicalInformationService;
+	private HistoricalInformationService historicalInformationService;
 	
 	@InjectMocks
-	HistoricalInformationController historicalInformationController;
+	private HistoricalInformationController historicalInformationController;
 	
-	MockMvc mockMvc;
+	private MockMvc mockMvc;
 	
 	@Before
 	public void setUp() throws Exception {

@@ -4,7 +4,7 @@ import java.util.List;
 
 public class RateListDTO {
 
-	List<RateDTO> rates;
+	private List<RateDTO> rates;
 
 	public RateListDTO(List<RateDTO> rates) {
 		this.rates = rates;

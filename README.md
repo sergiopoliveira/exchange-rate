@@ -60,12 +60,12 @@ Tests created using JUnit and Mockito. Run them as:
 
 ## Built With
 
-*  [Spring Boot](http://www.start.spring.io/) - The web framework used
-*  [Maven](https://maven.apache.org/) - Dependency Management
+*   [Spring Boot](http://www.start.spring.io/) - The web framework used
+*   [Maven](https://maven.apache.org/) - Dependency Management
 
 ## Authors
 
-*  **Sérgio Oliveira** - [sergiopoliveira](https://github.com/sergiopoliveira)
+*   **Sérgio Oliveira** - [sergiopoliveira](https://github.com/sergiopoliveira)
 
 ## License
 

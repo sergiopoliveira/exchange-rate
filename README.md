@@ -12,22 +12,16 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-JDK 11 or Docker is required to run this project.
+JDK 11 and Maven or Docker is required to run this project.
 
 ### Build and Run
 
 #### Maven
 
-Use Maven wrapper to build and run this project in Unix:
-
+Build and run the project with Maven:
 ```
-./mvnw package && java -jar target/exchange-rate-0.0.1-SNAPSHOT.jar
-```
-
-Or Windows:
-
-```
-mvnw.cmd package && java -jar target/exchange-rate-0.0.1-SNAPSHOT.jar
+mvn package
+mvn spring-boot:run
 ```
 
 #### Docker

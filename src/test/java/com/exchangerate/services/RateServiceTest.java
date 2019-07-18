@@ -20,13 +20,13 @@ public class RateServiceTest {
     private RateRepository rateRepository;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         rateService = new RateServiceImpl(rateRepository);
     }
 
     @Test
-    public void getRate() throws Exception {
+    public void getRate() {
 
         RateDTO rate1 = new RateDTO();
         Calendar calendar = Calendar.getInstance();

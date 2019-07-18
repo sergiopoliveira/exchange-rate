@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.math.BigDecimal;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 
@@ -17,17 +17,17 @@ public class Rate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String base;
+    private Currency baseCurrency;
     private String date;
-    private HashMap<Currency, BigDecimal> rates;
+    private EnumMap<Currency, BigDecimal> rates = new EnumMap<>(Currency.class);
 
     public Rate() {
     }
 
-    public Rate(Long id, String base, String date, HashMap<Currency, BigDecimal> rates) {
+    public Rate(Long id, Currency baseCurrency, String date, EnumMap<Currency, BigDecimal> rates) {
         super();
         this.id = id;
-        this.base = base;
+        this.baseCurrency = baseCurrency;
         this.date = date;
         this.rates = rates;
     }
@@ -40,12 +40,12 @@ public class Rate {
         this.id = id;
     }
 
-    public String getBase() {
-        return base;
+    public Currency getBaseCurrency() {
+        return baseCurrency;
     }
 
-    public void setBase(String base) {
-        this.base = base;
+    public void setBaseCurrency(Currency baseCurrency) {
+        this.baseCurrency = baseCurrency;
     }
 
     public String getDate() {
@@ -60,7 +60,7 @@ public class Rate {
         return rates;
     }
 
-    public void setRates(HashMap<Currency, BigDecimal> rates) {
+    public void setRates(EnumMap<Currency, BigDecimal> rates) {
         this.rates = rates;
     }
 

@@ -28,7 +28,6 @@ public class RateDTO {
     @JsonProperty("exchange_rate_trend")
     private ExchangeRateTrend exchangeRateTrend;
 
-
     private Calendar calendar = Calendar.getInstance();
 
     @JsonIgnore
@@ -103,6 +102,5 @@ public class RateDTO {
     public void setDay(int day) {
         this.day = day;
     }
-
 
 }

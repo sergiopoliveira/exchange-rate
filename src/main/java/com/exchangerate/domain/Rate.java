@@ -19,7 +19,7 @@ public class Rate {
     private Long id;
     private Currency baseCurrency;
     private String date;
-    private EnumMap<Currency, BigDecimal> rates = new EnumMap<>(Currency.class);
+    private EnumMap<Currency, BigDecimal> rates;
 
     public Rate() {
     }

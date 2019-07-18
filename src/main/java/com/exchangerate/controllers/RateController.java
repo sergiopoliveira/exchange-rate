@@ -17,7 +17,7 @@ public class RateController {
         this.rateService = rateService;
     }
 
-    @ApiOperation(value = "This will get the rate")
+    @ApiOperation(value = "Retrieves the current rate, based on the base and target currency")
     @GetMapping("/{date}/{baseCurrency}/{targetCurrency}")
     @ResponseStatus(HttpStatus.OK)
     public RateDTO getRate(@PathVariable String date, @PathVariable String baseCurrency, @PathVariable String targetCurrency) {

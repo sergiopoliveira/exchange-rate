@@ -1,8 +1,9 @@
 package com.exchangerate.services;
 
-import com.exchangerate.domain.ExchangeRateTrend;
 import com.exchangerate.domain.Rate;
 import com.exchangerate.dto.RateDTO;
+import com.exchangerate.enums.Currency;
+import com.exchangerate.enums.ExchangeRateTrend;
 import com.exchangerate.exceptions.InvalidParameterException;
 import com.exchangerate.repositories.RateRepository;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class RateServiceImpl implements RateService {
     }
 
     @Override
-    public RateDTO getRate(String date, String baseCurrency, String targetCurrency) {
+    public RateDTO getRate(String date, Currency baseCurrency, Currency targetCurrency) {
 
         calendar.setTime(getSimpleDateFormat(date));
 
@@ -102,7 +103,7 @@ public class RateServiceImpl implements RateService {
         }
     }
 
-    private Rate callApi(String baseCurrency) {
+    private Rate callApi(Currency baseCurrency) {
 
         calendar.add(Calendar.DATE, -1);
 
@@ -118,7 +119,7 @@ public class RateServiceImpl implements RateService {
                 Rate.class);
     }
 
-    private ExchangeRateTrend calculateExchangeRateTrend(String targetCurrency, List<Rate> rates) {
+    private ExchangeRateTrend calculateExchangeRateTrend(Currency targetCurrency, List<Rate> rates) {
 
         for (int i = -1; i <= 1; i++) {
             for (int j = 0; j < rates.size(); j++) {
@@ -137,7 +138,7 @@ public class RateServiceImpl implements RateService {
         return ExchangeRateTrend.UNDEFINED;
     }
 
-    private BigDecimal calculateAverageRate(String targetCurrency, List<Rate> rates) {
+    private BigDecimal calculateAverageRate(Currency targetCurrency, List<Rate> rates) {
 
         BigDecimal sumRates = BigDecimal.ZERO;
 

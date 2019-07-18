@@ -1,5 +1,7 @@
 package com.exchangerate.domain;
 
+import com.exchangerate.enums.Currency;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,12 +19,12 @@ public class Rate {
     private Long id;
     private String base;
     private String date;
-    private HashMap<String, BigDecimal> rates;
+    private HashMap<Currency, BigDecimal> rates;
 
     public Rate() {
     }
 
-    public Rate(Long id, String base, String date, HashMap<String, BigDecimal> rates) {
+    public Rate(Long id, String base, String date, HashMap<Currency, BigDecimal> rates) {
         super();
         this.id = id;
         this.base = base;
@@ -54,11 +56,11 @@ public class Rate {
         this.date = date;
     }
 
-    public Map<String, BigDecimal> getRates() {
+    public Map<Currency, BigDecimal> getRates() {
         return rates;
     }
 
-    public void setRates(HashMap<String, BigDecimal> rates) {
+    public void setRates(HashMap<Currency, BigDecimal> rates) {
         this.rates = rates;
     }
 

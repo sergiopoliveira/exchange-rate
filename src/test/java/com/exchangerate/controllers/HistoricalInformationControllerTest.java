@@ -1,7 +1,7 @@
 package com.exchangerate.controllers;
 
-import com.exchangerate.domain.ExchangeRateTrend;
 import com.exchangerate.dto.RateDTO;
+import com.exchangerate.enums.ExchangeRateTrend;
 import com.exchangerate.services.HistoricalInformationService;
 import org.junit.Before;
 import org.junit.Test;

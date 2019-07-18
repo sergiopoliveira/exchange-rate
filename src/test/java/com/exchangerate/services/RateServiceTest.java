@@ -1,6 +1,7 @@
 package com.exchangerate.services;
 
 import com.exchangerate.dto.RateDTO;
+import com.exchangerate.enums.Currency;
 import com.exchangerate.repositories.RateRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,10 +37,10 @@ public class RateServiceTest {
         rate1.setDay(calendar.get(Calendar.DAY_OF_MONTH));
 
         // given
-        when(rateService.getRate("2015-03-03", "EUR", "USD")).thenReturn(rate1);
+        when(rateService.getRate("2015-03-03", Currency.EUR, Currency.USD)).thenReturn(rate1);
 
         // when
-        RateDTO rateDTO = rateService.getRate("2015-03-03", "EUR", "USD");
+        RateDTO rateDTO = rateService.getRate("2015-03-03", Currency.EUR, Currency.USD);
 
         // then
         assertEquals(rate1.getYear(), rateDTO.getYear());

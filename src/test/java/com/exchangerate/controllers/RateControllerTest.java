@@ -1,7 +1,8 @@
 package com.exchangerate.controllers;
 
-import com.exchangerate.domain.ExchangeRateTrend;
 import com.exchangerate.dto.RateDTO;
+import com.exchangerate.enums.Currency;
+import com.exchangerate.enums.ExchangeRateTrend;
 import com.exchangerate.services.RateService;
 import org.junit.Before;
 import org.junit.Test;
@@ -48,7 +49,7 @@ public class RateControllerTest {
         rate1.setAverageFiveDays(BigDecimal.valueOf(0.69));
         rate1.setExchangeRateTrend(ExchangeRateTrend.DESC);
 
-        when(rateService.getRate("2010-03-19", "EUR", "CHF")).thenReturn(rate1);
+        when(rateService.getRate("2010-03-19", Currency.EUR, Currency.CHF)).thenReturn(rate1);
 
         mockMvc.perform(get(RateController.BASE_URL + "/2010-03-19/EUR/CHF")
                 .contentType(MediaType.APPLICATION_JSON)

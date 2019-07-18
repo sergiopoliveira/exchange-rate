@@ -1,6 +1,6 @@
 package com.exchangerate.dto;
 
-import com.exchangerate.domain.ExchangeRateTrend;
+import com.exchangerate.enums.ExchangeRateTrend;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

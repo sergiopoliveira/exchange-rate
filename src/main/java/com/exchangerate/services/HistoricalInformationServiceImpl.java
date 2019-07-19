@@ -1,14 +1,13 @@
 package com.exchangerate.services;
 
-import java.util.Calendar;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
-
 import com.exchangerate.dto.RateDTO;
 import com.exchangerate.exceptions.InvalidParameterException;
 import com.exchangerate.repositories.RateRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.Calendar;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class HistoricalInformationServiceImpl implements HistoricalInformationService {
@@ -61,7 +60,7 @@ public class HistoricalInformationServiceImpl implements HistoricalInformationSe
         }
 
         if (Integer.valueOf(year) < 2000 || Integer.valueOf(year) < 0) {
-            throw new InvalidParameterException("Month not correctly parsed");
+            throw new InvalidParameterException("Year not correctly parsed");
         }
 
         if (Integer.valueOf(month) > 12 || Integer.valueOf(month) < 0) {

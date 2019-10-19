@@ -25,6 +25,8 @@ import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -75,7 +77,12 @@ public class RateControllerTest {
                         parameterWithName("date").description("Date to check currency"),
                         parameterWithName("baseCurrency").description("Base Currency"),
                         parameterWithName("targetCurrency").description("Target Currency")
-                )))
+                        ),
+                        responseFields(
+                                fieldWithPath("exchange_rate").description("Exchange Rate"),
+                                fieldWithPath("average_five_days").description("Average of five days"),
+                                fieldWithPath("exchange_rate_trend").description("Exchange Rate Trend")
+                        )))
                 .andExpect(jsonPath("$.exchange_rate", equalTo(0.7)))
                 .andExpect(jsonPath("$.average_five_days", equalTo(0.69)))
                 .andExpect(jsonPath("$.exchange_rate_trend", equalTo(ExchangeRateTrend.DESC.toString())));

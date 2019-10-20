@@ -73,7 +73,7 @@ public class RateControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andDo(document("/api/exchange-rate", pathParameters(
+                .andDo(document("/api/exchange-rate-get", pathParameters(
                         parameterWithName("date").description("Date to check currency"),
                         parameterWithName("baseCurrency").description("Base Currency"),
                         parameterWithName("targetCurrency").description("Target Currency")

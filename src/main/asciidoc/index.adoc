@@ -11,19 +11,19 @@ documentation snippets.
 
 One showing how to make a request using cURL:
 
-include::{snippets}/api/exchange-rate/curl-request.adoc[]
+include::{snippets}/api/exchange-rate-get/curl-request.adoc[]
 
 One showing the HTTP request:
 
-include::{snippets}/api/exchange-rate/http-request.adoc[]
+include::{snippets}/api/exchange-rate-get/http-request.adoc[]
 
 And one showing the HTTP response:
 
-include::{snippets}/api/exchange-rate/http-response.adoc[]
+include::{snippets}/api/exchange-rate-get/http-response.adoc[]
 
 Response Body:
-include::{snippets}/api/exchange-rate/response-body.adoc[]
+include::{snippets}/api/exchange-rate-get/response-body.adoc[]
 
 
 Response Fields:
-include::{snippets}/api/exchange-rate/response-fields.adoc[]
+include::{snippets}/api/exchange-rate-get/response-fields.adoc[]

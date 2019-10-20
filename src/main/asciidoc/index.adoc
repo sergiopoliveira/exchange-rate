@@ -1,0 +1,29 @@
+= Exchange Rate API
+Sérgio Oliveira;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+
+Implementing https://exchangeratesapi.io/ api
+
+`RateControllerTest` makes a call to a very simple service and produces three
+documentation snippets.
+
+One showing how to make a request using cURL:
+
+include::{snippets}/api/exchange-rate/curl-request.adoc[]
+
+One showing the HTTP request:
+
+include::{snippets}/api/exchange-rate/http-request.adoc[]
+
+And one showing the HTTP response:
+
+include::{snippets}/api/exchange-rate/http-response.adoc[]
+
+Response Body:
+include::{snippets}/api/exchange-rate/response-body.adoc[]
+
+
+Response Fields:
+include::{snippets}/api/exchange-rate/response-fields.adoc[]
